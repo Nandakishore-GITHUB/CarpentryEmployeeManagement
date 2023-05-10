@@ -1,0 +1,181 @@
+{
+    "projects": [
+      {
+        "name": "Project A",
+        "duration": {
+          "normal_time": "20 hours",
+          "overtime": "5 hours",
+          "total_time": "25 hours"
+        },
+        "schedule": [
+          {
+            "date": "2023-05-01",
+            "duration": {
+              "normal_time": "5 hours",
+              "overtime": "0 hours",
+              "total_time": "5 hours"
+            },
+            "workers": [
+              {
+                "name": "John",
+                "duration": {
+                  "normal_time": "2 hours",
+                  "overtime": "0 hours",
+                  "total_time": "2 hours"
+                }
+              },
+              {
+                "name": "Mary",
+                "duration": {
+                  "normal_time": "3 hours",
+                  "overtime": "0 hours",
+                  "total_time": "3 hours"
+                }
+              }
+            ]
+          },
+          {
+            "date": "2023-05-02",
+            "duration": {
+              "normal_time": "8 hours",
+              "overtime": "2 hours",
+              "total_time": "10 hours"
+            },
+            "workers": [
+              {
+                "name": "John",
+                "duration": {
+                  "normal_time": "4 hours",
+                  "overtime": "1 hours",
+                  "total_time": "5 hours"
+                }
+              },
+              {
+                "name": "Mary",
+                "duration": {
+                  "normal_time": "4 hours",
+                  "overtime": "1 hours",
+                  "total_time": "5 hours"
+                }
+              }
+            ]
+          },
+          {
+            "date": "2023-05-03",
+            "duration": {
+              "normal_time": "7 hours",
+              "overtime": "3 hours",
+              "total_time": "10 hours"
+            },
+            "workers": [
+              {
+                "name": "John",
+                "duration": {
+                  "normal_time": "3 hours",
+                  "overtime": "2 hours",
+                  "total_time": "5 hours"
+                }
+              },
+              {
+                "name": "Mary",
+                "duration": {
+                  "normal_time": "4 hours",
+                  "overtime": "1 hours",
+                  "total_time": "5 hours"
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "name": "Project B",
+        "duration": {
+          "normal_time": "40 hours",
+          "overtime": "15 hours",
+          "total_time": "55 hours"
+        },
+        "schedule": [
+          {
+            "date": "2023-05-01",
+            "duration": {
+              "normal_time": "8 hours",
+              "overtime": "2 hours",
+              "total_time": "10 hours"
+            },
+            "workers": [
+              {
+                "name": "John",
+                "duration": {
+                  "normal_time": "4 hours",
+                  "overtime": "1 hours",
+                  "total_time": "5 hours"
+                }
+              },
+              {
+                "name": "Mary",
+                "duration": {
+                  "normal_time": "4 hours",
+                  "overtime": "1 hours",
+                  "total_time": "5 hours"
+                }
+              }
+            ]
+          },
+          {
+            "date": "2023-05-02",
+            "duration": {
+              "normal_time": "12 hours",
+              "overtime": "3 hours",
+              "total_time": "15 hours"
+            },
+            "workers" : [
+                  {
+                    "name": "John",
+                    "duration": {
+                      "normal_time": "8 hours",
+                      "overtime": "4 hours",
+                      "total_time": "12 hours"
+                    }
+                  },
+                  {
+                    "name": "Mary",
+                    "duration": {
+                      "normal_time": "12 hours",
+                      "overtime": "6 hours",
+                      "total_time": "18 hours"
+                    }
+                  }
+                ]
+              },
+              {
+                "date": "2023-05-04",
+                "duration": {
+                  "normal_time": "12 hours",
+                  "overtime": "5 hours",
+                  "total_time": "17 hours"
+                },
+                "workers": [
+                  {
+                    "name": "John",
+                    "duration": {
+                      "normal_time": "6 hours",
+                      "overtime": "2 hours",
+                      "total_time": "8 hours"
+                    }
+                  },
+                  {
+                    "name": "Mary",
+                    "duration": {
+                      "normal_time": "6 hours",
+                      "overtime": "3 hours",
+                      "total_time": "9 hours"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+      
