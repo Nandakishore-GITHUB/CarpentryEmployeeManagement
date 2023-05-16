@@ -16,6 +16,20 @@ export async function passwordValidate(values){
     return errors
 }
 
+//Validate Registration Page confirm password
+export async function confirmPasswordValidate(values){
+    const errors = confirmPasswordVerify({}, values)
+
+    return errors
+}
+
+// Validate Registration Page DOB
+export async function DOBvalidate(values){
+    const errors = DOBverify({}, values)
+
+    return errors
+}
+
 
 // validate Username
 
@@ -40,7 +54,7 @@ function passwordVerify(errors = {}, values){
     const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/
 
     if(!values.password){
-        errors.username = toast.error('Password Required')
+        errors.password = toast.error('Password Required')
     }else if(values.password.includes(" ")){
        errors.password = toast.error('Wrong Password')
     }else if(values.password.length < 4){
@@ -52,3 +66,34 @@ function passwordVerify(errors = {}, values){
     return errors
 }
 
+// Validate Confirm password
+
+function confirmPasswordVerify(errors = {}, values){
+
+
+    const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/
+
+    if(!values.password){
+        errors.confirmPassword = toast.error('Password Required')
+    }else if(values.confirmPassword.includes(" ")){
+       errors.confirmPassword = toast.error('Wrong Password')
+    }else if(values.confirmPassword.length < 4){
+       errors.confirmPassword = toast.error('Strength Low...! More than 4 characters required ')
+    }else if(!specialChars.test(values.password)){
+        errors.confirmPassword = toast.error('Password must have special characters')
+    }else if(values.password != values.confirmPassword){
+        errors.confirmPassword = toast.error('The passsword is not same')
+    }
+
+    return errors
+}
+
+
+// validate DOB
+
+function DOBverify(errors = {}, values){
+
+    if(!values.dob){
+        errors.dob = toast.error('Date Of Birth Required')
+    }
+}

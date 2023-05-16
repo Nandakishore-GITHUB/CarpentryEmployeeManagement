@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router-dom'
 import AdminLogin from './Views/AdminLogin'
+import AdminRegistration from './Views/AdminRegistration'
 import AdminDashboardSelect from './Views/AdminDashboardSelect'
 import AdminProjectDashboard from './Views/AdminProjectDashboard'
 import AdminWorkersDashboard from './Views/AdminWorkersDashboard'
@@ -23,6 +24,7 @@ function App() {
 
       <Routes>
         <Route path='/' element={<AdminLogin />} />
+        <Route path='/register' element={<AdminRegistration />} />
         <Route path='select-dashboard' element={<AdminDashboardSelect />} />
         <Route path='admin-project-dashboard' element={<AdminProjectDashboard />} />
         <Route path='admin-workers-dashboard' element={<AdminWorkersDashboard />} />

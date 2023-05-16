@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 function AdminDashboardSelect() {
 
     return (
-        <div className='flex flex-col sm:flex-row gap-6 items-center justify-center h-screen overflow-x-auto whitespace-nowrap bg-black bg-opacity-0 backdrop-filter backdrop-blur-lg'>
+        <div className='flex flex-col sm:flex-row gap-6 items-center justify-center md:h-screen overflow-x-auto whitespace-nowrap bg-black bg-opacity-0 backdrop-filter backdrop-blur-lg'>
            <Link to="/admin-project-dashboard"> <Tiles name="Projects" img={projects} className='w-1/2 sm:w-1/3 text-xl sm:text-2xl' /> </Link>
            <Link to="/admin-workers-dashboard"> <Tiles name="Workers" img={workers} className='w-1/2 sm:w-1/3 text-xl sm:text-2xl' /> </Link> 
             <Tiles name="Settings" img={settings} className='w-1/2 sm:w-1/3 text-xl sm:text-2xl' />
