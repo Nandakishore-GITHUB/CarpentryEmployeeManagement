@@ -1,21 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
+import Model from './Model';
+// import './List.css'
 
 function List() {
-  return (
-    <div className="flex flex-row items-center pt-7 lg:px-9 px-6 xl:-ml-0 -ml-8 xl:space-x-40">
 
-      <div className="flex lg:w-60 md:w-48 lg:h-52 md:h-48 mx-6 my-10 relative">
-        <div className="bg-white flex items-center justify-center shadow-md w-full rounded-lg p-6">
-          <div className="flex flex-col gap-5">
+
+  const [showModel,setShowModel] = useState(false)
+
+  const handleOnClose = () => setShowModel(false)
+
+  return (
+    <div className="flex md:flex-row flex-col items-center pt-7 lg:px-9 px-6 xl:-ml-0 -ml-8 xl:space-x-40">
+
+      <div className="flex lg:w-60 md:w-48 lg:h-52 md:h-48 mx-6 md:my-10 -my-6 mb-5 relative">
+        <div className="md:bg-white flex items-center justify-center md:shadow-md w-full rounded-lg md:p-6 p-2 md:ml-0 ml-8">
+          <div className="flex md:flex-col gap-5">
             <div>
-              <button className="text-gray-700 font-semibold text-2xl bg-slate-500 rounded-lg lg:w-56 md:w-40 h-12 p-1 hover:text-violet-700 active:bg-violet-700 active:text-white">Projects</button>
+              <button className="text-gray-700 font-semibold md:text-2xl text-lg  bg-white rounded-lg lg:w-56 md:w-40 w-28 md:h-12 p-1 hover:text-violet-700 active:bg-violet-700 active:text-white">Projects</button>
             </div>
             <div>
-              <button className="text-gray-700 font-semibold text-2xl bg-slate-500 rounded-lg lg:w-56 md:w-40 h-12 p-1 hover:text-violet-700 active:bg-violet-700 active:text-white">Workers</button>
+              <button className="text-gray-700 font-semibold md:text-2xl text-lg  bg-white rounded-lg lg:w-56 md:w-40 w-28 md:h-12 p-1 hover:text-violet-700 active:bg-violet-700 active:text-white">Workers</button>
             </div>
             <div>
-              <button className="text-gray-700 font-semibold text-2xl bg-slate-500 rounded-lg lg:w-56 md:w-40 h-12 p-1 hover:text-violet-700 active:bg-violet-700 active:text-white">Timings</button>
+              <button className="text-gray-700 font-semibold md:text-2xl text-lg  bg-white rounded-lg lg:w-56 md:w-40 w-28 md:h-12 p-1 hover:text-violet-700 active:bg-violet-700 active:text-white">Timings</button>
             </div>
           </div>
         </div>
@@ -28,7 +36,8 @@ function List() {
         <div className="grid grid-cols-1 md:grid-cols-3 xl:gap-x-60 lg:gap-x-36 md:gap-x-12 md:ml-0 md:w-full">
           <p className="font-bold col-span-1 md:ml-5">Projects</p>
           <p className="font-bold col-span-1 md:text-right">Project ID</p>
-          <button className="font-bold text-sm md:text-base col-span-1 bg-violet-700 bg-opacity-70 object-contain w-24 md:w-32 xl:w-36 rounded-lg hover:text-slate-200 transform active:scale-75 transition-transform">
+          <button className="font-semibold md:text-base col-span-1 bg-violet-700 bg-opacity-70 object-contain w-24 md:w-32 xl:w-36 rounded-lg hover:text-slate-200 transform active:scale-75 transition-transform"
+          onClick={() => setShowModel(true)}>
             New Project
           </button>
         </div>
@@ -38,6 +47,27 @@ function List() {
           <ListItem name="Project 3" id="EF3691" />
         </div>
       </div>
+
+    <div className='absolute'>
+      <Model visible={showModel} onClose={handleOnClose}/>
+    </div>
+
+
+
+      {/* Toogle menu (Optional) */}
+
+      {/* <div class="container w-fit bg-slate-100 rounded-full">
+        <div class="hamburger">
+          <input type="checkbox" class="hamburger-init"/>
+            <div class="menu">
+              <div class="bar1"></div>
+              <div class="bar2"></div>
+              <div class="bar3"></div>
+            </div>
+
+        </div>
+      </div> */}
+
     </div>
   );
 }
