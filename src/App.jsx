@@ -1,12 +1,13 @@
 import { Routes, Route } from 'react-router-dom'
-import AdminLogin from './Views/AdminLogin'
-import AdminRegistration from './Views/AdminRegistration'
-import AdminDashboardSelect from './Views/AdminDashboardSelect'
-import AdminProjectDashboard from './Views/AdminProjectDashboard'
-import AdminWorkersDashboard from './Views/AdminWorkersDashboard'
-import AdminSettingsDashboard from './Views/AdminSettingsDashboard'
+import AdminLogin from './Views/Admins Pages/AdminLogin'
+import AdminRegistration from './Views/Admins Pages/AdminRegistration'
+import AdminDashboardSelect from './Views/Admins Pages/AdminDashboardSelect'
+import AdminProjectDashboard from './Views/Admins Pages/AdminProjectDashboard'
+import AdminWorkersDashboard from './Views/Admins Pages/AdminWorkersDashboard'
+import AdminSettingsDashboard from './Views/Admins Pages/AdminSettingsDashboard'
 import BgVideo from './assets/backgroundvideo.mp4'
 import List from './Components/List'
+import WorkersDashboard from './Views/Workers Page/WorkersDashboard'
 
 function App() {
   
@@ -22,14 +23,16 @@ function App() {
         </video>
       </div>
 
-      <Routes>
+      {/* <Routes>
         <Route path='/' element={<AdminLogin />} />
         <Route path='/register' element={<AdminRegistration />} />
         <Route path='select-dashboard' element={<AdminDashboardSelect />} />
         <Route path='admin-project-dashboard' element={<AdminProjectDashboard />} />
         <Route path='admin-workers-dashboard' element={<AdminWorkersDashboard />} />
         <Route path='admin-settings-dashboard' element={<AdminSettingsDashboard />} />
-      </Routes>
+      </Routes> */}
+
+      <WorkersDashboard/>
     </div>
 
     

@@ -1,8 +1,8 @@
 import React from 'react'
-import Tiles from '../Components/Tiles'
-import projects from '../assets/projects.png'
-import workers from '../assets/workers.png'
-import settings from '../assets/settings.png'
+import Tiles from '../../Components/Tiles'
+import projects from '../../assets/projects.png'
+import workers from '../../assets/workers.png'
+import settings from '../../assets/settings.png'
 import { Link } from 'react-router-dom'
 
 function AdminDashboardSelect() {

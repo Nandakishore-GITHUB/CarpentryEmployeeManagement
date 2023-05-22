@@ -1,7 +1,7 @@
 import React from 'react'
-import Header from '../Components/Header'
+import Header from '../../Components/Header'
 
-import List from '../Components/List'
+import List from '../../Components/List'
 
 function AdminSettingsDashboard() {
     return (
