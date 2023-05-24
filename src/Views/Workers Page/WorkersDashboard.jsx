@@ -10,6 +10,7 @@ function WorkersDashboard() {
     const handleChange = (event) => {
       setValue(event.target.value)
     }
+    console.log(value);
 
     return (
         <div className='h-screen overflow-scroll bg-black bg-opacity-20 backdrop-filter backdrop-blur-lg'>
@@ -41,7 +42,7 @@ function WorkersDashboard() {
             {/* Project List & Details */}
 
             <>
-                <WorkersList projects={data} />
+                <WorkersList projects={data} value={value} />
             </>
         </div>
     )

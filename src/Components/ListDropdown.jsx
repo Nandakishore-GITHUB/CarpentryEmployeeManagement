@@ -25,6 +25,9 @@ function ListDropdown({ main, sub, subsub }) {
             <p className='font-bold'>3.30</p>
             <p className='font-bold'>1.30</p>
             <p className='font-bold'>5.00</p>
+            {/* <FiEdit className='size="25"' /> */}
+          </div>
+          <div className='flex items-end justify-end -mt-5'>
             <FiEdit className='size="25"' />
           </div>
         </div>
