@@ -49,9 +49,10 @@ function AdminRegistration() {
                 <div className="relative w-1/2 mt-9 lg:max-w-sm">
                     <select className="w-full p-2.5 text-black font-semibold bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600">
                         <option className='font-semibold'>Select Role</option>
-                        <option className='font-semibold'>Super Admin</option>
+                        <option className='font-semibold'>Supervisor</option>
                         <option className='font-semibold'>Project Manager</option>
-                        <option>Others</option>
+                        <option className='font-semibold'>Factory Manager</option>
+                        <option className='font-semibold'>Super Admin</option>
                     </select>
                 </div>
 

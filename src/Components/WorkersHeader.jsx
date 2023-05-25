@@ -22,7 +22,7 @@ function WorkersHeader({ title, button1, button2, link1, link2 }) {
                 <div className="flex items-center">
                     <img src={Profilepic} alt="Profile" className="w-20 h-20 rounded-xl mr-3 transition-transform duration-300 hover:transform hover:scale-110" />
                     <div className='ml-1'>
-                        <h1 className="text-3xl font-PoetSenOne font-extrabold transition-transform duration-300 hover:transform hover:scale-110 hover:text-violet-700">Worker</h1>
+                        <h1 className="lg:text-3xl md:text-lg text-2xl font-PoetSenOne font-extrabold transition-transform duration-300 hover:transform hover:scale-110 hover:text-violet-700">Muhammad</h1>
                         <p className="mt-2 text-sm font-semibold">Worker ID</p>
                     </div>
                 </div>
@@ -33,7 +33,15 @@ function WorkersHeader({ title, button1, button2, link1, link2 }) {
                     <button className=" lg:-ml-0 md:-ml-16 text-gray-950 text-3xl font-bold border-0 shadow-[0px_0px_14px_3px_#00000024] rounded-xl hidden sm:block py-5 px-8 sm:px-10 md:px-16 lg:px-40 mt-2 transition-transform duration-300 hover:transform hover:scale-110 active:text-violet-700">{title}</button>
                 </div>
 
-                <p className="mt-11 text-sm font-semibold">Worker Role</p>
+                <div>
+                {/* Log out */}
+                <button className="mt-2 text-white bg-red-700 font-bold border-0 shadow-[0px_0px_14px_3px_#00000024] rounded-xl py-2 px-4 lg:cursor-default cursor-none transform active:scale-y-75 transition-transform">Logout</button>
+
+                {/* Worker Role */}
+
+                <p className="mt-4 text-sm font-semibold">Worker Role</p>
+                </div>
+
             </header>
 
             {/* Title on small screens */}

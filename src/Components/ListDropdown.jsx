@@ -27,9 +27,9 @@ function ListDropdown({ main, sub, subsub }) {
             <p className='font-bold'>5.00</p>
             {/* <FiEdit className='size="25"' /> */}
           </div>
-          <div className='flex items-end justify-end -mt-5'>
+          <button className='flex items-end justify-end -mt-5'>
             <FiEdit className='size="25"' />
-          </div>
+          </button>
         </div>
 
         {/* Date and timings */}
@@ -44,8 +44,11 @@ function ListDropdown({ main, sub, subsub }) {
               <p className='font-bold'>3.30</p>
               <p className='font-bold'>1.30</p>
               <p className='font-bold'>5.00</p>
-              <FiEdit className='size="25"' />
+              {/* <FiEdit className='size="25"' /> */}
             </div>
+            <button className='flex items-end justify-end -mt-5'>
+            <FiEdit className='size="25"' />
+          </button>
           </div>
         )}
 
@@ -53,13 +56,16 @@ function ListDropdown({ main, sub, subsub }) {
 
         {PrjtExpand && DateExpand && (
           <div className="flex justify-between relative w-full md:w-11/12 bg-slate-200 rounded-lg shadow-[0px_0px_14px_3px_#00000024] p-4 m-2 hover:text-violet-700">
-            <p className="font-bold ml-6">{subsub}</p>
-            <div className="flex 2xl:gap-32 xl:gap-20 md:gap-16 sm:gap-0 justify-end items-center space-x-3">
+            <p className="font-bold ml-6 ">{subsub}</p>
+            <div className="flex 2xl:gap-32 xl:gap-20 md:gap-16 sm:gap-0 items-center">
               <p className='font-bold'>3.30</p>
               <p className='font-bold'>1.30</p>
               <p className='font-bold'>5.00</p>
-              <FiEdit className='size="25"' />
+              {/* <FiEdit className='size="25"' /> */}
             </div>
+            <button className='flex items-end justify-end -mt-5'>
+            <FiEdit className='size="25"' />
+          </button>
           </div>
         )}
 
