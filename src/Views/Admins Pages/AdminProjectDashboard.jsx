@@ -23,7 +23,7 @@ function AdminProjectDasboard() {
                 </label>
             </div>
 
-            <ListDropdown main="Project 1" sub="Date 1" subsub="Worker 1" />
+            <ListDropdown main="Project 1" projectID="4131" nickname="4-seater sofa" sub="Date 1" subsub="Worker 1" />
 
         </div>
 

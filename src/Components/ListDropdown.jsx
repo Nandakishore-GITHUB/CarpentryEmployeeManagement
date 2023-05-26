@@ -2,7 +2,7 @@ import { FiPlus, FiMinus, FiEdit } from 'react-icons/fi'
 import { useState } from 'react';
 
 
-function ListDropdown({ main, sub, subsub }) {
+function ListDropdown({ main, nickname, projectID, sub, subsub }) {
 
   const [PrjtExpand, SetPrjtExpand] = useState(false)
 
@@ -16,17 +16,21 @@ function ListDropdown({ main, sub, subsub }) {
 
         {/* Projects and timings */}
 
-        <div className="flex justify-between relative w-full lg:w- md:w-11/12 sm:w-fit bg-slate-50 rounded-lg shadow-[0px_0px_14px_3px_#00000024] p-4 m-4 transition-transform duration-300 hover:transform hover:scale-105 hover:text-violet-700" onClick={() => { SetPrjtExpand(!PrjtExpand); SetDateExpand(false); }}>
+        <div className="flex justify-between spa relative w-full md:w-11/12 sm:w-fit bg-slate-50 rounded-lg shadow-[0px_0px_14px_3px_#00000024] p-4 m-4 transition-transform duration-300 hover:transform hover:scale-105 hover:text-violet-700" onClick={() => { SetPrjtExpand(!PrjtExpand); SetDateExpand(false); }}>
           <div>
             {PrjtExpand ? <FiMinus className='size="25" absolute mt-1' /> : <FiPlus className='size="25" absolute mt-1' />}
           </div>
-          <p className="font-bold ml-6 absolute">{main}</p>
-          <div className="flex 2xl:gap-32 xl:gap-20 md:gap-16 sm:gap-0 justify-end items-center space-x-3">
+          <p className="font-bold">{main}</p>
+          <p className=" font-semibold text-sm lg:mt-5 mt-10 lg:ml-40 -ml-28">Id:{projectID}</p>
+          <p className="font-semibold absolute lg:ml-52 lg:mt-0 mt-5 ml-9">({nickname})</p>
+          {/* <div className="flex 2xl:gap-32 xl:gap-20 md:gap-5 sm:gap-0 justify-end items-center space-x-3"> */}
             <p className='font-bold'>3.30</p>
             <p className='font-bold'>1.30</p>
             <p className='font-bold'>5.00</p>
+            <p className='font-bold'>30 hrs</p>
+            <p className='font-bold'>Rosario J</p>
             {/* <FiEdit className='size="25"' /> */}
-          </div>
+          {/* </div> */}
           <button className='flex items-end justify-end -mt-5'>
             <FiEdit className='size="25"' />
           </button>

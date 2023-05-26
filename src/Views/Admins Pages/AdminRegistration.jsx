@@ -32,11 +32,11 @@ function AdminRegistration() {
     })
 
     return (
-        <div className='flex items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 h-screen bg-black bg-opacity-0 backdrop-filter backdrop-blur-md'>
+        <div className='flex items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 h-screen bg-black bg-opacity-0 backdrop-filter backdrop-blur-md overflow-scroll'>
 
             <Toaster position='top-center' reverseOrder={false}></Toaster>
 
-            <div className='w-full lg:h-fit  h-full bg-white rounded-xl shadow-lg dark:border md:mt-0 sm:max-w-md p-8'>
+            <div className='w-full lg:h-fit relative h-full bg-white rounded-xl shadow-lg dark:border md:mt-0 sm:max-w-md p-8'>
                 <h2 className="text-center text-5xl font-PoetSenOne font-bold leading-9 tracking-tight text-blue-600">
                     Register
                 </h2>
@@ -44,7 +44,7 @@ function AdminRegistration() {
                     Tell Us Your Role.
                 </h2>
 
-                {/* Select Role */}
+    {/* Select Role */}
 
                 <div className="relative w-1/2 mt-9 lg:max-w-sm">
                     <select className="w-full p-2.5 text-black font-semibold bg-white border rounded-md shadow-sm outline-none appearance-none focus:border-indigo-600">
@@ -56,7 +56,7 @@ function AdminRegistration() {
                     </select>
                 </div>
 
-                {/* Provide Details */}
+    {/* Provide Details */}
                 <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
                     <form className="space-y-6" action="#" method="POST" onSubmit={formik.handleSubmit}>
                         <div>
@@ -78,7 +78,7 @@ function AdminRegistration() {
                             </div>
                         </div>
 
-                        {/* Password */}
+    {/* Password */}
 
                         <div>
                             <div className="flex items-center justify-between">
@@ -104,7 +104,7 @@ function AdminRegistration() {
                             </div>
                         </div>
 
-                        {/* Confirm Password */}
+    {/* Confirm Password */}
 
                         <div>
                             <div className="flex items-center justify-between">
@@ -130,7 +130,7 @@ function AdminRegistration() {
                             </div>
                         </div>
 
-                        {/* DOB */}
+    {/* Date Of Birth */}
 
                         <div>
                             <label htmlFor=" username" className="block text-sm font-medium leading-6 text-gray-900">

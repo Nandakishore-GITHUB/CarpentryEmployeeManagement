@@ -2,16 +2,31 @@ import React, { useState } from 'react';
 import { FiPlus, FiMinus, FiEdit } from 'react-icons/fi';
 
 function WorkersList(props) {
-  const [PrjtExpand, SetPrjtExpand] = useState(false);
+  const [PrjtSelect, SetPrjtSelect] = useState(false);
 
   const [selectedKey, setSelectedKey] = useState('');
+
+  const [selectedRole, setSelectedRole] = useState('');
+
 
   const handleOnClick = (key) => {
     setSelectedKey(key);
   };
 
+
+  const handleRoleChange = (e, projectId) => {
+    setSelectedRole((prevSelectedRole) => ({
+      ...prevSelectedRole,
+      [projectId]: e.target.value,
+    }));
+    onValueChange(e.target.value)
+  };
+  console.log(selectedRole);
+
   const { projects } = props;
   const { value } = props;
+  const { start } = props;
+  const { onValueChange } = props;
 
   return (
     <div className="flex flex-col items-center justify-center pt-7 px-4 pb-3">
@@ -43,27 +58,19 @@ function WorkersList(props) {
           .map((project) => (
             <div
               key={project['Project ID']}
-              className="relative w-full md:w-11/12 sm:w-fit bg-slate-50 rounded-lg shadow-[0px_0px_14px_3px_#00000024] p-4 m-4 transition-transform duration-300 md:hover:transform md:hover:scale-105 hover:text-violet-700"
+              className={
+                PrjtSelect && selectedKey === project['Project ID']
+                  ? start && selectedRole
+                    ?"relative w-full md:w-11/12 sm:w-fit bg-gradient-to-r from-green-500 to-emerald-500 rounded-lg shadow-[0px-0px-14px-3px-#00000024] p-4 m-4 transition-transform duration-300 md:hover:transform md:hover:scale-105"
+                    :"relative w-full md:w-11/12 sm:w-fit bg-gradient-to-r from-indigo-500 to-sky-500 rounded-lg shadow-[0px-0px-14px-3px-#00000024] p-4 m-4 transition-transform duration-300 md:hover:transform md:hover:scale-105"
+                  : "relative w-full md:w-11/12 sm:w-fit bg-slate-50 rounded-lg shadow-[0px-0px-14px-3px-#00000024] p-4 m-4 transition-transform duration-300 md:hover:transform md:hover:scale-105 hover:text-violet-700"
+              }
+
               onClick={() => {
-                SetPrjtExpand(true);
+                SetPrjtSelect(true);
                 handleOnClick(project['Project ID']);
               }}
             >
-              <div className="w-fit md:-ml-0 -ml-3">
-                {PrjtExpand && selectedKey === project['Project ID'] ? (
-                  <div className="flex absolute items-center mt-1">
-                    <input checked type="radio" value="" name="active-task" className="w-4 h-4 accent-green-600 bg-gray-100 border-gray-300 cursor-default" />
-                  </div>
-                ) : (
-                  <div className="flex absolute items-center mt-1">
-                    <input type="radio" value="" name="active-task" className="w-4 h-4 accent-green-600 bg-gray-100 border-gray-300 cursor-default" />
-                  </div>
-                )}
-
-
-
-
-              </div>
               <div className="flex 2xl:gap-60 xl:gap-40 md:gap-20 gap-1 2xl:ml-20 md:ml-10 ml-2">
                 <p className="font-bold md:text-base text-sm bg-slate-500">{project['Project ID']}</p>
                 <p className="font-bold md:text-base text-sm bg-slate-500">{project['Project Name']}</p>
@@ -71,24 +78,31 @@ function WorkersList(props) {
                 <p className="font-bold md:text-base text-sm bg-slate-500">{project['Project Manager Name']}</p>
               </div>
               <div className='flex items-end justify-end -mt-6'>
-                <select className="text-black font-semibold md:px-2 px-1 bg-white border rounded-md shadow-sm outline-none appearance-none">
-                  <option className='font-semibold'>Select Role</option>
-                  <option className='font-semibold'>Carpentry</option>
-                  <option className='font-semibold'>Packing</option>
-                  <option className='font-semibold'>Polishing</option>
-                  <option className='font-semibold'>Painting</option>
-                  <option className='font-semibold'>Grouping</option>
+                <select
+                  className="text-black font-semibold md:px-2 px-1 bg-white border rounded-md shadow-sm outline-none appearance-none"
+                  value={selectedRole[project['Project ID']] || 'Select Role'}
+                  onChange={(e) => handleRoleChange(e, project['Project ID'])}
+                >
+                  <option className="font-semibold" disabled>
+                    Select Role
+                  </option>
+                  <option className="font-semibold">Carpentry</option>
+                  <option className="font-semibold">Packing</option>
+                  <option className="font-semibold">Polishing</option>
+                  <option className="font-semibold">Painting</option>
+                  <option className="font-semibold">Grouping</option>
                 </select>
+
+
               </div>
             </div>
           ))}
       </div>
-
-      {/* Start Work */}
-      <button className="mt-2 text-white bg-red-700 font-bold border-0 shadow-[0px_0px_14px_3px_#00000024] rounded-xl py-2 px-4 lg:cursor-default cursor-none transform active:scale-y-75 transition-transform">Start</button>
-      <button className="mt-2 text-white bg-red-700 font-bold border-0 shadow-[0px_0px_14px_3px_#00000024] rounded-xl py-2 px-4 lg:cursor-default cursor-none transform active:scale-y-75 transition-transform">End Day</button>
     </div>
   );
 }
 
 export default WorkersList;
+
+
+

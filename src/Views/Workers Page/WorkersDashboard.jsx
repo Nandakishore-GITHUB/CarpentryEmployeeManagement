@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React, { useState } from 'react'
 import WorkersHeader from '../../Components/WorkersHeader'
 import WorkersList from '../../Components/WorkersList'
 import data from '../../Data Examples/project.json'
@@ -7,10 +7,25 @@ function WorkersDashboard() {
 
     const [value, setValue] = useState('')
 
+    const [startWork, setStartWork] = useState(false)
+
+    const [selectedRole, setSelectedRole] = useState('');
+
     const handleChange = (event) => {
-      setValue(event.target.value)
+        setValue(event.target.value)
     }
     console.log(value);
+
+    const handleStartWork = (e) => {
+        e.preventDefault();
+        if(selectedRole){
+            setStartWork(true)
+        }
+    }
+
+    const handleSelectedRoleChange = (value) => {
+        setSelectedRole(value);
+      };
 
     return (
         <div className='h-screen overflow-scroll bg-black bg-opacity-20 backdrop-filter backdrop-blur-lg'>
@@ -42,8 +57,17 @@ function WorkersDashboard() {
             {/* Project List & Details */}
 
             <>
-                <WorkersList projects={data} value={value} />
+                <WorkersList projects={data} value={value} start={startWork} onValueChange={handleSelectedRoleChange} />
             </>
+
+            {/* Start Work */}
+            <div className="flex justify-end items-center m-5 gap-3">
+            <button className="mt-2 text-white bg-gradient-to-r from-green-500 to-emerald-500 font-bold border-0 shadow-[0px_0px_14px_3px_#00000024] rounded-xl py-2 px-4 lg:cursor-default cursor-none transform active:scale-y-75 transition-transform"
+            onClick={(e) => handleStartWork(e)}>
+            Start Work
+            </button>
+            <button className="mt-2 text-white bg-gradient-to-r from-indigo-500 to-sky-500 font-bold border-0 shadow-[0px_0px_14px_3px_#00000024] rounded-xl py-2 px-4 lg:cursor-default cursor-none transform active:scale-y-75 transition-transform">End Day</button>
+            </div>
         </div>
     )
 }
