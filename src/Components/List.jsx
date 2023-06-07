@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
-import Model from './Model';
+import Model from './ProjectModel';
 // import './List.css'
 
 function List() {
@@ -62,7 +62,7 @@ function List() {
             <div class="menu">
               <div class="bar1"></div>
               <div class="bar2"></div>
-              <div class="bar3"></div>
+              <div class="bar3 "></div>
             </div>
 
         </div>

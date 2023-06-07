@@ -1,10 +1,11 @@
 import React, { useState } from 'react'
 import { FaUserAlt } from 'react-icons/fa'
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai'
-import { Toaster } from 'react-hot-toast'
+import { Toaster, toast } from 'react-hot-toast'
 import { useFormik } from 'formik'
 import { usernameValidate, passwordValidate } from '../../helper/validate'
 import { Link } from 'react-router-dom'
+import axios from '../../api/axios'
 
 function AdminLogin() {
 
@@ -22,11 +23,31 @@ function AdminLogin() {
         validateOnBlur: false,
         validateOnChange: false,
         onSubmit: async values => {
-            console.log(values);
+            try {
+                const response = await axios.post('/auth/login', JSON.stringify( { username : values.username, password: values.password } ), 
+                {
+                    headers: { 
+                        'Content-Type': 'application/json'
+                    }
+                })
+                toast.success(response.data.message);
+                console.log( JSON.stringify(response.data) );
+                localStorage.setItem('token', response.data.token)
+                localStorage.setItem('username', response.data.data.username)
+                localStorage.setItem('role', response.data.data.roles)
+                localStorage.setItem('id', response.data.data.userId)
+                localStorage.setItem('name', response.data.data.name)
+            } catch (error) {
+                if (error.response && error.response.data) {
+                    toast.error(error.response.data.message);
+                  } else {
+                    console.log(JSON.stringify(error));
+                  }                  
+            }
         }
     })
 
-    return (
+    return ( 
         <div className='flex items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 h-screen bg-black bg-opacity-0 backdrop-filter backdrop-blur-md'>
 
             <Toaster position='top-center' reverseOrder={false}></Toaster>

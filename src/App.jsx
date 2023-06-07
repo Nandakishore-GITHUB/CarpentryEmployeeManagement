@@ -8,6 +8,7 @@ import AdminSettingsDashboard from './Views/Admins Pages/AdminSettingsDashboard'
 import BgVideo from './assets/backgroundvideo.mp4'
 import List from './Components/List'
 import WorkersDashboard from './Views/Workers Page/WorkersDashboard'
+import RegisterModel from './Components/RegisterModel'
 
 function App() {
   
@@ -23,16 +24,18 @@ function App() {
         </video>
       </div>
 
-      <Routes>
+      {/* <Routes>
         <Route path='/' element={<AdminLogin />} />
         <Route path='/register' element={<AdminRegistration />} />
         <Route path='select-dashboard' element={<AdminDashboardSelect />} />
         <Route path='admin-project-dashboard' element={<AdminProjectDashboard />} />
         <Route path='admin-workers-dashboard' element={<AdminWorkersDashboard />} />
         <Route path='admin-settings-dashboard' element={<AdminSettingsDashboard />} />
-      </Routes>
+      </Routes> */}
 
       {/* <WorkersDashboard/> */}
+
+      <RegisterModel/>
     </div>
 
     
