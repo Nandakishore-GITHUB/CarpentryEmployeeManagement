@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import Lottie from 'lottie-react'
 import success from '../assets/success.json'
-import axios from 'axios'
+import { useFormik } from 'formik'
+import { Toaster, toast } from 'react-hot-toast'
+import protectedData from '../api/requests'
 
 function Model({ visible, onClose }) {
 
@@ -18,36 +20,31 @@ function Model({ visible, onClose }) {
         }
     }
 
+    const formik = useFormik({
+        initialValues: {
+            projectName: '',
+            projectNickname: '',
+            projectId: '',
+            projectManager: '',
+            estimatedTime: ''
+        },
+        onSubmit: async (values) => {
+            try {
+                const URL = '/project/add'
+                const response = await protectedData(URL, values)
+                if (response.status === 201) {
+                    toast.success('Project created successfully!')
+                    onClose()
+                    setShowSuccess(true)
+                } else {
+                    toast.error(response)
+                }
+            } catch (error) {
+                toast.error('Something went wrong!')
+            }
+        }
+    })
 
-    // Handle form data
-    const [formData, setFormData] = useState({
-        projectName: '',
-        projectNickname: '',
-        projectID: '',
-        projectManager: ''
-    });
-
-    const handleInputChange = (event) => {
-        const { name, value } = event.target;
-        setFormData({ [name]: value });
-    };
-
-
-    // post request
-    const handleSubmit = (event) => {
-        event.preventDefault();
-    
-        axios.post('/api/project/add', formData)
-          .then(response => {
-            console.log('POST request successful:', response.data.message);
-            setShowSuccess(true);
-            // Handle the success state or further actions
-          })
-          .catch(error => {
-            console.error('Error making POST request:', error.message);
-            // Handle the error state or further actions
-          });
-      };
 
 
 
@@ -56,6 +53,7 @@ function Model({ visible, onClose }) {
 
     return (
         <div id='container' className='fixed inset-0 w-screen bg-black bg-opacity-30 backdrop-blur-sm flex justify-center items-center' onClick={handleOnClose}>
+            <Toaster position='top-center' reverseOrder={false}></Toaster>
 
 
             {showSuccess ? <div className="flex bg-white rounded-lg flex-col justify-center px-20 py-12 lg:px-40 md:px-32">
@@ -77,7 +75,7 @@ function Model({ visible, onClose }) {
                     </div>
 
                     <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-                        <form className="space-y-6" action="#" method="POST">
+                        <form className="space-y-6" action="#" method="POST" onSubmit={formik.handleSubmit}>
                             <div>
                                 <label className="block text-sm font-medium leading-6 text-gray-900">
                                     Project Name
@@ -86,10 +84,9 @@ function Model({ visible, onClose }) {
                                     <input
                                         id="ProjectName"
                                         name="ProjectName"
+                                        {...formik.getFieldProps('projectName')}
                                         type="text"
                                         required
-                                        value={formData.projectName}
-                                        onChange={handleInputChange}
                                         className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
                                     />
                                 </div>
@@ -105,10 +102,9 @@ function Model({ visible, onClose }) {
                                     <input
                                         id="ProjectNickname"
                                         name="ProjectNickname"
+                                        {...formik.getFieldProps('projectNickname')}
                                         type="text"
                                         required
-                                        value={formData.projectNickname}
-                                        onChange={handleInputChange}
                                         className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                     />
                                 </div>
@@ -124,10 +120,9 @@ function Model({ visible, onClose }) {
                                     <input
                                         id="ProjectID"
                                         name="ProjectID"
+                                        {...formik.getFieldProps('projectId')}
                                         type="text"
                                         required
-                                        value={formData.projectID}
-                                        onChange={handleInputChange}
                                         className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                     />
                                 </div>
@@ -143,10 +138,28 @@ function Model({ visible, onClose }) {
                                     <input
                                         id="ProjectManager"
                                         name="ProjectManager"
+                                        {...formik.getFieldProps('projectManager')}
                                         type="text"
                                         required
-                                        value={formData.projectManager}
-                                        onChange={handleInputChange}
+                                        className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                    />
+                                </div>
+                            </div>
+
+
+                            <div>
+                                <div className="flex items-center justify-between">
+                                    <label className="block text-sm font-medium leading-6 text-gray-900">
+                                        Estimated Time
+                                    </label>
+                                </div>
+                                <div className="mt-2">
+                                    <input
+                                        id="EstimatedTime"
+                                        name="EstimatedTime"
+                                        {...formik.getFieldProps('estimatedTime')}
+                                        type="Number"
+                                        required
                                         className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
                                     />
                                 </div>
@@ -156,7 +169,7 @@ function Model({ visible, onClose }) {
                                 <button
                                     type="Submit"
                                     className="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-                                    onSubmit={handleSubmit}>
+                                >
                                     Add Project
                                 </button>
                                 <button

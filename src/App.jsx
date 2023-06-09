@@ -24,22 +24,15 @@ function App() {
         </video>
       </div>
 
-      {/* <Routes>
+      <Routes>
         <Route path='/' element={<AdminLogin />} />
         <Route path='/register' element={<AdminRegistration />} />
         <Route path='select-dashboard' element={<AdminDashboardSelect />} />
         <Route path='admin-project-dashboard' element={<AdminProjectDashboard />} />
         <Route path='admin-workers-dashboard' element={<AdminWorkersDashboard />} />
         <Route path='admin-settings-dashboard' element={<AdminSettingsDashboard />} />
-      </Routes> */}
-
-      {/* <WorkersDashboard/> */}
-
-      <RegisterModel/>
+      </Routes>
     </div>
-
-    
-    // <List/>
 
   )
 }

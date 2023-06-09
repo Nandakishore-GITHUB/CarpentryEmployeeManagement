@@ -16,7 +16,7 @@ function ListDropdown({ main, nickname, projectID, sub, subsub }) {
 
         {/* Projects and timings */}
 
-        <div className="flex justify-between spa relative w-full md:w-11/12 sm:w-fit bg-slate-50 rounded-lg shadow-[0px_0px_14px_3px_#00000024] p-4 m-4 transition-transform duration-300 hover:transform hover:scale-105 hover:text-violet-700" onClick={() => { SetPrjtExpand(!PrjtExpand); SetDateExpand(false); }}>
+        <div className="flex justify-between relative w-full md:w-11/12 sm:w-fit bg-slate-50 rounded-lg shadow-[0px_0px_14px_3px_#00000024] p-4 m-4 transition-transform duration-300 hover:transform hover:scale-105 hover:text-violet-700" onClick={() => { SetPrjtExpand(!PrjtExpand); SetDateExpand(false); }}>
           <div>
             {PrjtExpand ? <FiMinus className='size="25" absolute mt-1' /> : <FiPlus className='size="25" absolute mt-1' />}
           </div>
