@@ -3,7 +3,7 @@ import Lottie from 'lottie-react'
 import success from '../assets/success.json'
 import { useFormik } from 'formik'
 import { Toaster, toast } from 'react-hot-toast'
-import protectedData from '../api/requests'
+import requests from '../api/requests.js'
 
 function Model({ visible, onClose }) {
 
@@ -20,6 +20,22 @@ function Model({ visible, onClose }) {
         }
     }
 
+    const handleSubmit = async (values) => {
+        try {
+          const URL = '/project/add';
+          const response = await requests.postData(URL, values);
+          if (response.status === 201) {
+            toast.success('Project created successfully!');
+            setShowSuccess(true);
+          } else {
+            toast.error(response);
+          }
+        } catch (error) {
+          toast.error('Something went wrong!');
+          console.log(error);
+        }
+      };
+
     const formik = useFormik({
         initialValues: {
             projectName: '',
@@ -28,21 +44,7 @@ function Model({ visible, onClose }) {
             projectManager: '',
             estimatedTime: ''
         },
-        onSubmit: async (values) => {
-            try {
-                const URL = '/project/add'
-                const response = await protectedData(URL, values)
-                if (response.status === 201) {
-                    toast.success('Project created successfully!')
-                    onClose()
-                    setShowSuccess(true)
-                } else {
-                    toast.error(response)
-                }
-            } catch (error) {
-                toast.error('Something went wrong!')
-            }
-        }
+        onSubmit: async (values) => handleSubmit(values)
     })
 
 

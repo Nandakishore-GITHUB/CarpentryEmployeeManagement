@@ -18,12 +18,13 @@ const List = () => {
             <th className="py-3 px-6">Project Name</th>
             <th className="py-3 px-6">Project Nickname</th>
             <th className="py-3 px-6">Project Manager</th>
-            <th className="py-3 px-6"></th> {/* Empty header for the edit button */}
+            {/* Empty header for the edit button */}
+            <th className="py-3 px-6"></th> 
           </tr>
         </thead>
         <tbody className="text-gray-600">
           {projects.map(project => (
-            <tr key={project.id} className='bg-slate-50 rounded-full border-b shadow-[0px_0px_14px_3px_#00000024] transition-transform duration-300 hover:transform hover:scale-105 hover:text-violet-700'>
+            <tr key={project.id} className='bg-slate-50 rounded-full border-b shadow-[0px_0px_14px_3px_#00000024] hover:text-violet-700'>
               <td className="py-4 px-6 text-center">{project.id}</td>
               <td className="py-4 px-6 text-center">{project.name}</td>
               <td className="py-4 px-6 text-center">{project.nickname}</td>
