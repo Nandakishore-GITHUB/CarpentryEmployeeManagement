@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Lottie from 'lottie-react'
 import success from '../assets/success.json'
 import { useFormik } from 'formik'

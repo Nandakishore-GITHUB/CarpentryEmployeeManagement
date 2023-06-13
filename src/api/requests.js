@@ -3,7 +3,7 @@ import axios from "./axios";
 
 
 
-const postData = async () => {
+const postData = async (URL, data) => {
 
     try {
         // Get the token from local storage
@@ -39,7 +39,7 @@ const postData = async () => {
 }
 
 
-const getData = async () => {
+const getData = async (URL) => {
 
     try {
         // Get the token from local storage
