@@ -3,7 +3,7 @@ import { FaUserAlt } from 'react-icons/fa'
 import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai'
 import { Toaster } from 'react-hot-toast'
 import { useFormik } from 'formik'
-import { usernameValidate, passwordValidate, confirmPasswordValidate, DOBvalidate } from '../../helper/validate'
+import { usernameValidate, passwordValidate, confirmPasswordValidate } from '../../helper/validate'
 import { Link } from 'react-router-dom'
 
 function AdminRegistration() {
@@ -22,7 +22,6 @@ function AdminRegistration() {
             usernameValidate(values) // Calling the validate functions
             passwordValidate(values)
             confirmPasswordValidate(values)
-            DOBvalidate(values)
         },
         validateOnBlur: false,
         validateOnChange: false,

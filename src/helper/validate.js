@@ -23,13 +23,6 @@ export async function confirmPasswordValidate(values){
     return errors
 }
 
-// Validate Registration Page DOB
-export async function DOBvalidate(values){
-    const errors = DOBverify({}, values)
-
-    return errors
-}
-
 
 // validate Username
 
@@ -73,7 +66,7 @@ function confirmPasswordVerify(errors = {}, values){
 
     const specialChars = /[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/
 
-    if(!values.password){
+    if(!values.confirmPassword){
         errors.confirmPassword = toast.error('Password Required')
     }else if(values.confirmPassword.includes(" ")){
        errors.confirmPassword = toast.error('Wrong Password')
@@ -88,12 +81,3 @@ function confirmPasswordVerify(errors = {}, values){
     return errors
 }
 
-
-// validate DOB
-
-function DOBverify(errors = {}, values){
-
-    if(!values.dob){
-        errors.dob = toast.error('Date Of Birth Required')
-    }
-}

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Lottie from 'lottie-react'
 import success from '../assets/success.json'
+import { usernameValidate, passwordValidate, confirmPasswordValidate } from '../helper/validate.js'
 import { useFormik } from 'formik'
 import { Toaster, toast } from 'react-hot-toast'
 import requests from '../api/requests.js'
@@ -13,6 +14,32 @@ function RegisterModel({ visible, onClose }) {
     // show sub role field only when worker and supervisor is selected
     const [showSubRole, setShowSubRole] = useState(false)
 
+    //state to set role field
+    const [roles, setRole] = useState([])
+
+    // handle checkbox value change
+    const handleCheckboxChange = (event) => {
+        const value = event.target.value;
+        let updatedSelectedValues = [...roles]; // Create a copy of the current role state
+
+        if (event.target.checked) {
+            updatedSelectedValues.push(value); // Add the value to the copy
+        } else {
+            updatedSelectedValues = updatedSelectedValues.filter((item) => item !== value); // Remove the value from the copy
+        }
+        formik.setFieldValue('roles', updatedSelectedValues);
+        let showSubRoleFlag = false;
+        if (updatedSelectedValues.includes("worker") || updatedSelectedValues.includes("supervisor")) {
+            showSubRoleFlag = true;
+        }
+
+        setRole(updatedSelectedValues); // Update the role state
+        setShowSubRole(showSubRoleFlag); // Update the showSubRole state
+    };
+
+    console.log(roles);
+
+
 
     // Handle on close function - to close the model and the success element
     const handleOnClose = (e) => {
@@ -24,11 +51,12 @@ function RegisterModel({ visible, onClose }) {
     }
 
     const handleSubmit = async (values) => {
+        console.log(values);
         try {
-            const URL = '/aut/register';
+            const URL = '/auth/register';
             const response = await requests.postData(URL, values);
             if (response.status === 201) {
-                toast.success(response.message);
+                toast.success(response.data.message);
                 setShowSuccess(true);
             } else {
                 toast.error(response);
@@ -41,12 +69,21 @@ function RegisterModel({ visible, onClose }) {
 
     const formik = useFormik({
         initialValues: {
-            projectName: '',
-            projectNickname: '',
-            projectId: '',
-            projectManager: '',
-            estimatedTime: ''
+            name: '',
+            username: '',
+            userId: '',
+            password: '',
+            confirmPassword: '',
+            roles: '',
+            subrole: ''
         },
+        validate: (values) => {
+            usernameValidate(values) // Calling the validate functions
+            passwordValidate(values)
+            confirmPasswordValidate(values)
+        },
+        validateOnBlur: false,
+        validateOnChange: false,
         onSubmit: async (values) => handleSubmit(values)
     })
 
@@ -73,7 +110,7 @@ function RegisterModel({ visible, onClose }) {
             </div>
 
                 : <div className="flex bg-white rounded-lg flex-col justify-center px-6 py-12 lg:px-40 md:px-32">
-                    <div className="sm:mx-auto sm:w-full sm:max-w-sm">
+                    <div className="-mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
                         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                             Enter <span className='text-violet-700'>Employee</span> Details
                         </h2>
@@ -89,7 +126,7 @@ function RegisterModel({ visible, onClose }) {
                                     <input
                                         id="EmployeeName"
                                         name="EmployeeName"
-                                        {...formik.getFieldProps('projectName')}
+                                        {...formik.getFieldProps('name')}
                                         type="text"
                                         required
                                         className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400  sm:text-sm sm:leading-6"
@@ -107,7 +144,7 @@ function RegisterModel({ visible, onClose }) {
                                     <input
                                         id="Username"
                                         name="Username"
-                                        {...formik.getFieldProps('projectNickname')}
+                                        {...formik.getFieldProps('username')}
                                         type="text"
                                         required
                                         className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
@@ -125,7 +162,7 @@ function RegisterModel({ visible, onClose }) {
                                     <input
                                         id="EmployeeID"
                                         name="EmployeeID"
-                                        {...formik.getFieldProps('projectId')}
+                                        {...formik.getFieldProps('userId')}
                                         type="text"
                                         required
                                         className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
@@ -141,9 +178,27 @@ function RegisterModel({ visible, onClose }) {
                                 </div>
                                 <div className="mt-2">
                                     <input
-                                        id="ProjectManager"
-                                        name="ProjectManager"
-                                        {...formik.getFieldProps('projectManager')}
+                                        id="password"
+                                        name="password"
+                                        {...formik.getFieldProps('password')}
+                                        type="text"
+                                        required
+                                        className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                                    />
+                                </div>
+                            </div>
+
+                            <div>
+                                <div className="flex items-center justify-between">
+                                    <label className="block text-sm font-medium leading-6 text-gray-900">
+                                        Confirm Password
+                                    </label>
+                                </div>
+                                <div className="mt-2">
+                                    <input
+                                        id="confirmPassword"
+                                        name="confirmPassword"
+                                        {...formik.getFieldProps('confirmPassword')}
                                         type="text"
                                         required
                                         className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
@@ -161,31 +216,71 @@ function RegisterModel({ visible, onClose }) {
                                 </div>
                                 <div className="mt-2 lg:max-w-sm grid grid-cols-3">
                                     <div className="flex items-center mr-4">
-                                        <input type="checkbox" id="worker" className="mr-1" onChange={() => setShowSubRole(!showSubRole)} />
+                                        <input
+                                            type="checkbox"
+                                            id="worker"
+                                            className="mr-1"
+                                            value="worker"
+                                            checked={roles.includes("worker")}
+                                            onChange={handleCheckboxChange}
+                                            disabled={roles.length > 0 && !roles.includes("worker")}
+                                        />
                                         <label htmlFor="worker" className="font-semibold ml-2">
                                             Worker
                                         </label>
                                     </div>
                                     <div className="flex items-center mr-4">
-                                        <input type="checkbox" id="supervisor" className="mr-1" onChange={() => setShowSubRole(!showSubRole)} />
+                                        <input
+                                            type="checkbox"
+                                            id="supervisor"
+                                            className="mr-1"
+                                            value="supervisor"
+                                            checked={roles.includes("supervisor")}
+                                            onChange={handleCheckboxChange}
+                                            disabled={roles.length > 0 && !roles.includes("supervisor")}
+                                        />
                                         <label htmlFor="supervisor" className="font-semibold ml-2">
                                             Supervisor
                                         </label>
                                     </div>
                                     <div className="flex items-center mr-4">
-                                        <input type="checkbox" id="factory-manager" className="mr-1" onChange={() => setShowSubRole(false)} />
+                                        <input
+                                            type="checkbox"
+                                            id="factory-manager"
+                                            className="mr-1"
+                                            value="factorymanager"
+                                            checked={roles.includes("factorymanager")}
+                                            onChange={handleCheckboxChange}
+                                            disabled={roles.length > 0 && !roles.includes("factorymanager")}
+                                        />
                                         <label htmlFor="factory-manager" className="font-semibold ml-2">
                                             Factory Manager
                                         </label>
                                     </div>
                                     <div className="flex items-center mr-4">
-                                        <input type="checkbox" id="project-manager" className="mr-1" onChange={() => setShowSubRole(false)} />
+                                        <input
+                                            type="checkbox"
+                                            id="project-manager"
+                                            className="mr-1"
+                                            value="projectmanager"
+                                            checked={roles.includes("projectmanager")}
+                                            onChange={handleCheckboxChange}
+                                            disabled={roles.length > 0 && !roles.includes("projectmanager") && !roles.includes("superadmin")}
+                                        />
                                         <label htmlFor="project-manager" className="font-semibold ml-2">
                                             Project Manager
                                         </label>
                                     </div>
                                     <div className="flex items-center mr-4">
-                                        <input type="checkbox" id="super-admin" className="mr-1" onChange={() => setShowSubRole(false)} />
+                                        <input
+                                            type="checkbox"
+                                            id="super-admin"
+                                            className="mr-1"
+                                            value="superadmin"
+                                            checked={roles.includes("superadmin")}
+                                            onChange={handleCheckboxChange}
+                                            disabled={roles.length > 0 && !roles.includes("projectmanager") && !roles.includes("superadmin")}
+                                        />
                                         <label htmlFor="super-admin" className="font-semibold ml-2">
                                             Super Admin
                                         </label>
@@ -203,9 +298,9 @@ function RegisterModel({ visible, onClose }) {
                                     </div>
                                     <div className="mt-2">
                                         <input
-                                            id="EstimatedTime"
-                                            name="EstimatedTime"
-                                            {...formik.getFieldProps('estimatedTime')}
+                                            id="subrole"
+                                            name="subrole"
+                                            {...formik.getFieldProps('subrole')}
                                             type="text"
                                             required
                                             className="block w-full rounded-md border-0 py-1.5 px-3 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
