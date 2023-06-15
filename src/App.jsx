@@ -30,6 +30,7 @@ function App() {
         <Route path='admin-project-dashboard' element={<AdminProjectDashboard />} />
         <Route path='admin-workers-dashboard' element={<AdminWorkersDashboard />} />
         <Route path='admin-settings-dashboard' element={<AdminSettingsDashboard />} />
+        <Route path='workers-dashboard' element={<WorkersDashboard />} />
       </Routes>
     </div>
 

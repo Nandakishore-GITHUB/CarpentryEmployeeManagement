@@ -1,15 +1,26 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Profilepic from '../assets/ProfilePicture.jpg'
 import { CiMenuFries } from 'react-icons/ci'
 import { Link } from 'react-router-dom';
 
 function Header({title, button1, button2, link1, link2}) {
 
+  // toogle option for mobile view
   const [isOpen, setIsOpen] = useState(false);
+
+  // state to store username and role
+  const [username, setUsername] = useState('');
+  const [role, setRole] = useState('');
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    // get username and role from the localStorage
+    setUsername(localStorage.getItem('username'));
+    setRole(localStorage.getItem('role').toLocaleUpperCase()); 
+  })
 
   return (
 
@@ -22,8 +33,8 @@ function Header({title, button1, button2, link1, link2}) {
         <div className="flex items-center">
           <img src={Profilepic} alt="Profile" className="w-20 h-20 rounded-xl mr-3 transition-transform duration-300 hover:transform hover:scale-110" />
           <div className='ml-1'>
-            <h1 className="text-3xl font-PoetSenOne font-extrabold transition-transform duration-300 hover:transform hover:scale-110 hover:text-violet-700">Lego</h1>
-            <p className="mt-2 text-sm font-semibold">Admin</p>
+            <h1 className="text-3xl font-PoetSenOne font-extrabold transition-transform duration-300 hover:transform hover:scale-110 hover:text-violet-700">{username}</h1>
+            <p className="mt-2 text-sm font-semibold">{role}</p>
           </div>
         </div>
 

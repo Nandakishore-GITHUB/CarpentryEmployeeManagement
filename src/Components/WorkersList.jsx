@@ -72,10 +72,10 @@ function WorkersList(props) {
               }}
             >
               <div className="flex 2xl:gap-60 xl:gap-40 md:gap-20 gap-1 2xl:ml-20 md:ml-10 ml-2">
-                <p className="font-bold md:text-base text-sm bg-slate-500">{project['Project ID']}</p>
-                <p className="font-bold md:text-base text-sm bg-slate-500">{project['Project Name']}</p>
-                <p className="font-bold md:text-base text-sm bg-slate-500">{project['Project Nickname']}</p>
-                <p className="font-bold md:text-base text-sm bg-slate-500">{project['Project Manager Name']}</p>
+                <p className="font-bold md:text-base text-sm ">{project['Project ID']}</p>
+                <p className="font-bold md:text-base text-sm ">{project['Project Name']}</p>
+                <p className="font-bold md:text-base text-sm ">{project['Project Nickname']}</p>
+                <p className="font-bold md:text-base text-sm ">{project['Project Manager Name']}</p>
               </div>
               <div className='flex items-end justify-end -mt-6'>
                 <select

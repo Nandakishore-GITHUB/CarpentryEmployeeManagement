@@ -1,5 +1,6 @@
 import React from 'react';
 import { FiEdit } from 'react-icons/fi';
+import { MdDelete } from 'react-icons/md'; 
 
 
 const List = ({ column, data }) => {
@@ -11,7 +12,7 @@ const List = ({ column, data }) => {
         <thead>
           <tr>
             {column.map((col, index) => (
-              <th key={index}>{col.name}</th>
+              <th key={index} className='py-2'>{col.name}</th>
             ))}
             {/* Empty header for the edit button */}
             <th className="py-3 px-6"></th>
@@ -23,9 +24,14 @@ const List = ({ column, data }) => {
               {column.map((col, columnIndex) => (
                 <td key={columnIndex} className='font-semibold'>{rowData[col.value]}</td>
               ))}
-              <td className="py-4 px-6">
+              <td className="py-4 px-3">
                 <button className="text-blue-500 hover:text-blue-700">
                   <FiEdit className="h-5 w-5" />
+                </button>
+              </td>
+              <td className="py-4 px-3">
+                <button className="text-red-500 hover:text-red-700">
+                  <MdDelete className="h-5 w-5" />
                 </button>
               </td>
             </tr>
