@@ -1,11 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
-import { MdDelete } from 'react-icons/md'; 
+import { MdDelete } from 'react-icons/md';
+
+// Delete Modal
+import DeleteModal from './DeleteModal'
 
 
-const List = ({ column, data }) => {
+const List = ({ column, data, onDelete }) => {
   console.log(data);
   console.log(column);
+
+  const handleDelete = (_id) => {
+    onDelete(_id)
+  };
+
   return (
     <div className="p-5 m-5 relative overflow-x-auto shadow-md sm:rounded-lg bg-slate-500 bg-opacity-50 backdrop-blur-sm">
       <table className="min-w-full rounded-xl">
@@ -31,7 +39,7 @@ const List = ({ column, data }) => {
               </td>
               <td className="py-4 px-3">
                 <button className="text-red-500 hover:text-red-700">
-                  <MdDelete className="h-5 w-5" />
+                  <MdDelete className="h-5 w-5" onClick={() => handleDelete(rowData._id)} />
                 </button>
               </td>
             </tr>

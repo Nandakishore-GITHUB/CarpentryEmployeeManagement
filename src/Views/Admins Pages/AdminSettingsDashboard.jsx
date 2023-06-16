@@ -7,6 +7,7 @@ import Model from '../../Components/ProjectModel';
 import List from '../../Components/List'
 import requests from '../../api/requests.js';
 import RegisterModel from '../../Components/RegisterModel'
+import DeleteModal from '../../Components/DeleteModal'
 
 function AdminSettingsDashboard() {
 
@@ -21,6 +22,9 @@ function AdminSettingsDashboard() {
     // handling mdel for registering employees
     const [registerModel, setRegisterModel] = useState(false)
 
+    // handling model for deleteing data and setting state for passing _id to delete
+    const [deleteData, setDeleteData] = useState(null)
+
     // handling loading animations
     const [loading, setLoading] = useState(true)
 
@@ -34,6 +38,7 @@ function AdminSettingsDashboard() {
     const handleOnClose = () => {
         setShowModel(false)
         setRegisterModel(false)
+        setDeleteData(null)
     }
 
     // function to handle state changes on clicking project button
@@ -53,6 +58,12 @@ function AdminSettingsDashboard() {
         setURL('/project/all')
         setActive('timing')
     }
+
+    // function to handleDelete
+    const handleDelete = (_id) => {
+        setDeleteData(_id);
+    }
+
 
     //add useEffect to get data from server
     useEffect(() => {
@@ -161,7 +172,7 @@ function AdminSettingsDashboard() {
 
                     : <div className='w-full'>
                         {data && data.length > 0 ? (
-                            <List column={active === 'project' ? projecColumns : active === 'workers' ? employeeColumns : []} data={data} />
+                            <List column={active === 'project' ? projecColumns : active === 'workers' ? employeeColumns : []} data={data} onDelete={handleDelete} />
                         ) : (
                             <p>No data available.</p>
                         )}
@@ -176,6 +187,10 @@ function AdminSettingsDashboard() {
 
                 <div className='absolute'>
                     <RegisterModel visible={registerModel} onClose={handleOnClose} />
+                </div>
+
+                <div className='absolute'>
+                    <DeleteModal itemId={deleteData} active={setActive} onClose={handleOnClose} />
                 </div>
 
             </div>

@@ -32,6 +32,7 @@ function AdminLogin() {
                 })
                 toast.success(response.data.message);
                 console.log( JSON.stringify(response.data) );
+                localStorage.setItem('_id', response.data.data._id)
                 localStorage.setItem('token', response.data.token)
                 localStorage.setItem('username', response.data.data.username)
                 localStorage.setItem('role', response.data.data.roles)
