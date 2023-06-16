@@ -3,11 +3,11 @@ import { Toaster, toast } from 'react-hot-toast'
 import Header from '../../Components/Header'
 import Lottie from 'lottie-react'
 import Loading from '../../assets/loading.json'
-import Model from '../../Components/ProjectModel';
+import Model from '../../Components/Models/ProjectModel';
 import List from '../../Components/List'
 import requests from '../../api/requests.js';
-import RegisterModel from '../../Components/RegisterModel'
-import DeleteModal from '../../Components/DeleteModal'
+import RegisterModel from '../../Components/Models/RegisterModel'
+import DeleteModal from '../../Components/Models/DeleteModal'
 
 function AdminSettingsDashboard() {
 
@@ -172,7 +172,7 @@ function AdminSettingsDashboard() {
 
                     : <div className='w-full'>
                         {data && data.length > 0 ? (
-                            <List column={active === 'project' ? projecColumns : active === 'workers' ? employeeColumns : []} data={data} onDelete={handleDelete} />
+                            <List column={active === 'project' ? projecColumns : active === 'workers' ? employeeColumns : []} data={data} active={active} onDelete={handleDelete} />
                         ) : (
                             <p>No data available.</p>
                         )}
@@ -190,7 +190,7 @@ function AdminSettingsDashboard() {
                 </div>
 
                 <div className='absolute'>
-                    <DeleteModal itemId={deleteData} active={setActive} onClose={handleOnClose} />
+                    <DeleteModal itemId={deleteData} active={active} onClose={handleOnClose} />
                 </div>
 
             </div>

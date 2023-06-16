@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
 import Lottie from 'lottie-react'
-import success from '../assets/success.json'
-import { usernameValidate, passwordValidate, confirmPasswordValidate } from '../helper/validate.js'
+import success from '../../assets/success.json'
+import { usernameValidate, passwordValidate, confirmPasswordValidate } from '../../helper/validate.js'
 import { useFormik } from 'formik'
 import { Toaster, toast } from 'react-hot-toast'
-import requests from '../api/requests.js'
+import requests from '../../api/requests.js'
 
 function RegisterModel({ visible, onClose }) {
 

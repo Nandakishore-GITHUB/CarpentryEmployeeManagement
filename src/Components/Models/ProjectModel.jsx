@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import Lottie from 'lottie-react'
-import success from '../assets/success.json'
+import success from '../../assets/success.json'
 import { useFormik } from 'formik'
 import { Toaster, toast } from 'react-hot-toast'
-import requests from '../api/requests.js'
+import requests from '../../api/requests.js'
 
 function Model({ visible, onClose }) {
 
