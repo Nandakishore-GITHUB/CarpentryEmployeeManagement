@@ -13,9 +13,9 @@ const List = ({ column, data, active, onDelete }) => {
   };
 
   if (active === 'workers') return (
-    <div className="p-5 m-5 relative overflow-x-auto shadow-md sm:rounded-lg bg-slate-500 bg-opacity-50 backdrop-blur-sm">
+    <div className="p-5 m-5 relative overflow-x-auto shadow-md sm:rounded-lg bg-opacity-50 backdrop-blur-sm">
       <table className="min-w-full rounded-xl">
-        <thead>
+        <thead className='text-gray-200'>
           <tr>
             {column.map((col, index) => (
               <th key={index} className="py-2">
@@ -60,9 +60,9 @@ const List = ({ column, data, active, onDelete }) => {
   )
 
   return (
-    <div className="p-5 m-5 relative overflow-x-auto shadow-md sm:rounded-lg bg-slate-500 bg-opacity-50 backdrop-blur-sm">
+    <div className="p-5 m-5 relative overflow-x-auto shadow-md sm:rounded-lg bg-opacity-50 backdrop-blur-sm">
       <table className="min-w-full rounded-xl">
-        <thead>
+        <thead className='text-gray-200'>
           <tr>
             {column.map((col, index) => (
               <th key={index} className='py-2'>{col.name}</th>

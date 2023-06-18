@@ -109,7 +109,7 @@ function RegisterModel({ visible, onClose }) {
                 </div>
             </div>
 
-                : <div className="flex bg-white rounded-lg flex-col justify-center px-6 py-12 lg:px-40 md:px-32">
+                : <div className="flex bg-white rounded-lg flex-col justify-center px-6 py-12 md:px-20">
                     <div className="-mt-8 sm:mx-auto sm:w-full sm:max-w-sm">
                         <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                             Enter <span className='text-violet-700'>Employee</span> Details

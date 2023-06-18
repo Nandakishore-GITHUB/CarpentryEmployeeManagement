@@ -64,6 +64,16 @@ function AdminSettingsDashboard() {
         setDeleteData(_id);
     }
 
+    const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+
+    const showNavigationDrawer = () => {
+        setIsDrawerVisible(true);
+    };
+
+    const hideNavigationDrawer = () => {
+        setIsDrawerVisible(false);
+    };
+
 
     //add useEffect to get data from server
     useEffect(() => {
@@ -105,21 +115,110 @@ function AdminSettingsDashboard() {
     ];
 
     return (
-        <div className='h-screen bg-black bg-opacity-20 backdrop-filter backdrop-blur-lg'>
+        <div className='top-0 left-0 w-full h-screen bg-black bg-opacity-20 backdrop-filter backdrop-blur-lg z-[-1] overflow-x-hidden overflow-y-visible'>
             <Toaster position='top-center' reverseOrder={false}></Toaster>
 
+            <div className='z-50'>
+                <Header title="Settings" button1="Projects" button2="Workers" link1="/admin-project-dashboard" link2="/admin-workers-dashboard" />
+            </div>
 
-            <Header title="Settings" button1="Projects" button2="Workers" link1="/admin-project-dashboard" link2="/admin-workers-dashboard" />
+            {/* Side bar */}
+
+
+            {/* <!-- drawer init and show --> */}
+            <div class="text-left m-5">
+                <button
+                    className="text-white bg-gradient-to-r from-gray-800 to-gray-600 font-medium rounded-lg text-sm px-5 py-2.5 mr-2"
+                    type="button"
+                    onClick={showNavigationDrawer}
+                >
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+
+            <div
+                id="drawer-navigation"
+                className={`fixed top-24 mt-1 left-0 z-30 w-64 h-screen p-4 overflow-y-auto transition-transform ${isDrawerVisible ? '' : '-translate-x-full'
+                    } bg-gray-100`}
+                tabIndex="-1"
+                aria-labelledby="drawer-navigation-label"
+            >
+                {/* Drawer content */}
+                <h5 id="drawer-navigation-label" className="text-base font-semibold text-gray-900 uppercase">
+                    Select Settings
+                </h5>
+                <button
+                    type="button"
+                    onClick={hideNavigationDrawer}
+                    data-drawer-hide="drawer-navigation"
+                    aria-controls="drawer-navigation"
+                    className="text-gray-600 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 absolute top-2.5 right-2.5 inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white"
+                >
+                    <svg
+                        aria-hidden="true"
+                        className="w-5 h-5"
+                        fill="currentColor"
+                        viewBox="0 0 20 20"
+                        xmlns="http://www.w3.org/2000/svg"
+                    >
+                        <path
+                            fillRule="evenodd"
+                            d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                            clipRule="evenodd"
+                        ></path>
+                    </svg>
+                    <span className="sr-only">Close menu</span>
+                </button>
+                <div className="py-4 overflow-y-auto">
+                    <ul className="space-y-2 font-medium">
+                        {/* Menu items */}
+                        <li>
+                            <div href="#" className="flex items-center p-2 text-black rounded-lg hover:bg-gray-400 cursor-pointer"
+                                onClick={handleProjectButton}>
+                                <span className="ml-2">Projects</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div href="#" className="flex items-center p-2 text-black rounded-lg hover:bg-gray-400 cursor-pointer"
+                                onClick={handleEmployeeButton}>
+                                <span className="ml-2">Employees</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div href="#" className="flex items-center p-2 text-black rounded-lg hover:bg-gray-400 cursor-pointer"
+                                onClick={handleTimingButton}>
+                                <span className="ml-2">Timings</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div href="#" className="flex items-center p-2 text-black rounded-lg hover:bg-gray-400 cursor-pointer"
+                                onClick={handleTimingButton}>
+                                <span className="ml-2">Calender</span>
+                            </div>
+                        </li>
+                        {/* More menu items */}
+                    </ul>
+                </div>
+            </div>
+
+
 
             {/*Search Box */}
 
-            <div className="relative mb-3 md:m-5 md:px-0 px-4 mt-3">
+            <div className="relative mb-3 md:m-5 lg:px-60 px-4 mt-3">
                 <input
                     type="search"
-                    className="peer block min-h-[auto] lg:w-80 md:w-64 w-52 rounded-full border-0 bg-gray-50 shadow-[inset_-12px_-8px_40px_#46464620] outline-none px-3 py-[0.32rem] leading-[1.6] transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none dark:text-neutral-800 dark:placeholder:text-neutral-200 dark:peer-focus:text-primary [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
+                    className="peer block min-h-[auto] w-full rounded-full border-0 bg-gray-50 
+                    shadow-[inset_-12px_-8px_40px_#46464620] outline-none px-6 py-[0.32rem] leading-[1.6] 
+                    transition-all duration-200 ease-linear focus:placeholder:opacity-100 peer-focus:text-primary 
+                    data-[te-input-state-active]:placeholder:opacity-100 motion-reduce:transition-none
+                    dark:text-neutral-800 dark:placeholder:text-neutral-900 dark:peer-focus:text-primary 
+                    [&:not([data-te-input-placeholder-active])]:placeholder:opacity-0"
                     placeholder="Type query" />
                 <label
-                    className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] md:px-0 px-4 origin-[0_0] truncate pt-[0.37rem] leading-[1.6 eutransition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-950 dark:peer-focus:text-primary">
+                    className="pointer-events-none absolute left-3 top-0 mb-0 max-w-[90%] lg:px-60 px-4 origin-[0_0] truncate pt-[0.37rem] leading-[1.6 eutransition-all duration-200 ease-out peer-focus:-translate-y-[0.9rem] peer-focus:scale-[0.8] peer-focus:text-primary peer-data-[te-input-state-active]:-translate-y-[0.9rem] peer-data-[te-input-state-active]:scale-[0.8] motion-reduce:transition-none dark:text-neutral-950 dark:peer-focus:text-primary">
                     Search
                 </label>
             </div>
@@ -147,7 +246,7 @@ function AdminSettingsDashboard() {
 
             <div className='flex md:flex-row flex-col items-center pt-7 lg:px-9 px-6 xl:-ml-0 -ml-8 xl:space-x-40'>
 
-                <div className="flex lg:w-60 md:w-48 lg:h-52 md:h-48 mx-6 md:my-10 -my-6 mb-5 relative">
+                {/* <div className="flex lg:w-60 md:w-48 lg:h-52 md:h-48 mx-6 md:my-10 -my-6 mb-5 relative">
                     <div className="md:bg-white flex items-center justify-center md:shadow-md w-full rounded-lg md:p-6 p-2 md:ml-0 ml-8">
                         <div className="flex md:flex-col gap-5">
                             <div>
@@ -161,7 +260,7 @@ function AdminSettingsDashboard() {
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> */}
 
 
                 {loading ?
