@@ -1,34 +1,52 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import WorkersHeader from '../../Components/WorkersHeader'
+import { Toaster, toast } from 'react-hot-toast'
+import Lottie from 'lottie-react'
+import Loading from '../../assets/loading.json'
+import requests from '../../api/requests.js'
 import WorkersList from '../../Components/WorkersList'
-import data from '../../Data Examples/project.json'
 
 function WorkersDashboard() {
 
-    const [value, setValue] = useState('')
+    //  state to set data
+    const [data, setData] = useState([])
 
-    const [startWork, setStartWork] = useState(false)
+    // state to set Loaeding
+    const [loading, setLoading] = useState(true)
 
-    const [selectedRole, setSelectedRole] = useState('');
+    useEffect(() => {
 
-    const handleChange = (event) => {
-        setValue(event.target.value)
-    }
-    console.log(value);
+        const fetchData = async () => {
+            try {
+                const URL = '/project/all'
+                const response = await requests.getData(URL);
+                if (response.status === 200) {
+                    console.log(response.data.data);
+                    setData(response.data.data)
+                    setLoading(false);
+                } else {
+                    toast.error(response);
+                }
+            } catch (error) {
+                toast.error('Something went wrong!');
+                console.log(error);
+            }
+        };
 
-    const handleStartWork = (e) => {
-        e.preventDefault();
-        if(selectedRole){
-            setStartWork(true)
-        }
-    }
+        fetchData();
 
-    const handleSelectedRoleChange = (value) => {
-        setSelectedRole(value);
-      };
+    }, []);
+
+    const projecColumns = [
+        { name: 'Project ID', value: 'projectId' },
+        { name: 'Project Name', value: 'projectName' },
+        { name: 'Project Nickname', value: 'projectNickname' },
+        { name: 'Project Manager', value: 'projectManager' },
+    ];
 
     return (
         <div className='h-screen overflow-scroll bg-black bg-opacity-20 backdrop-filter backdrop-blur-lg'>
+            <Toaster position='top-center' reverseOrder={false}></Toaster>
 
             {/* Header */}
 
@@ -38,8 +56,6 @@ function WorkersDashboard() {
 
             <div className="relative mb-3 md:m-5 lg:px-60 px-4 mt-3">
                 <input
-                    value={value}
-                    onChange={handleChange}
                     type="search"
                     className="peer block min-h-[auto] w-full rounded-full border-0 bg-gray-50 
                     shadow-[inset_-12px_-8px_40px_#46464620] outline-none px-6 py-[0.32rem] leading-[1.6] 
@@ -54,20 +70,38 @@ function WorkersDashboard() {
                 </label>
             </div>
 
+            {/* Buttons */}
+            <div className="flex justify-end items-center m-5 gap-3">
+
+                {/* Start Session Button */}
+                <button className="mt-2 text-white bg-gradient-to-r from-green-500 to-emerald-500 font-bold border-0 shadow-[0px_0px_14px_3px_#00000024] rounded-xl py-2 px-4 lg:cursor-default cursor-none transform active:scale-y-75 transition-transform"
+                >
+                    Start Work
+                </button>
+
+                {/* End Session Button */}
+                <button className="mt-2 text-white bg-gradient-to-r from-indigo-500 to-sky-500 font-bold border-0 shadow-[0px_0px_14px_3px_#00000024] rounded-xl py-2 px-4 lg:cursor-default cursor-none transform active:scale-y-75 transition-transform">End Day</button>
+            </div>
+
+
             {/* Project List & Details */}
 
-            <>
-                <WorkersList projects={data} value={value} start={startWork} onValueChange={handleSelectedRoleChange} />
-            </>
+            {loading ?
 
-            {/* Start Work */}
-            <div className="flex justify-end items-center m-5 gap-3">
-            <button className="mt-2 text-white bg-gradient-to-r from-green-500 to-emerald-500 font-bold border-0 shadow-[0px_0px_14px_3px_#00000024] rounded-xl py-2 px-4 lg:cursor-default cursor-none transform active:scale-y-75 transition-transform"
-            onClick={(e) => handleStartWork(e)}>
-            Start Work
-            </button>
-            <button className="mt-2 text-white bg-gradient-to-r from-indigo-500 to-sky-500 font-bold border-0 shadow-[0px_0px_14px_3px_#00000024] rounded-xl py-2 px-4 lg:cursor-default cursor-none transform active:scale-y-75 transition-transform">End Day</button>
-            </div>
+                <div>
+                    <Lottie animationData={Loading} className='md:w-60 w-44 mt-20 xl:ml-96 md:ml-40 ml-10' />
+                </div>
+
+                : <div className='w-full'>
+                    {data && data.length > 0 ? (
+                        <WorkersList column={projecColumns} data={data} />
+                    ) : (
+                        <p>No data available.</p>
+                    )}
+                </div>
+
+            }
+
         </div>
     )
 }

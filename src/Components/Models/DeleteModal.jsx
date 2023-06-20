@@ -11,9 +11,6 @@ function DeleteModal({ itemId, active, onClose }) {
     // state to show the success
     const [showSuccess, setShowSuccess] = useState(false)
 
-    // state to set url to delete
-    const [url, setUrl] = useState('')
-
 
     // Handle on close function - to close the model and the success element
     const handleOnClose = (e) => {

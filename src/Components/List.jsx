@@ -1,25 +1,28 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { FiEdit } from 'react-icons/fi';
 import { MdDelete } from 'react-icons/md';
 
 
 
-const List = ({ column, data, active, onDelete }) => {
+const List = ({ column, data, active, onUpdate, onDelete }) => {
   console.log('got data successfully' + data);
   console.log(column);
 
+  const handleUpdate = (_id) => {
+    onUpdate(_id)
+  };
   const handleDelete = (_id) => {
     onDelete(_id)
   };
 
   if (active === 'workers') return (
     <div className="p-5 m-5 relative overflow-x-auto shadow-md sm:rounded-lg bg-opacity-50 backdrop-blur-sm">
-      <table className="min-w-full rounded-xl">
+      <table className="min-w-full rounded-xl border-separate border-spacing-y-4">
         <thead className='text-gray-200'>
           <tr>
             {column.map((col, index) => (
               <th key={index} className="py-2">
-                {col.name} 
+                {col.name}
               </th>
             ))}
             {/* Empty header for the edit button */}
@@ -41,7 +44,10 @@ const List = ({ column, data, active, onDelete }) => {
                 ))}
                 <td className="py-4 px-3">
                   <button className="text-blue-500 hover:text-blue-700">
-                    <FiEdit className="h-5 w-5" />
+                    <FiEdit
+                      className="h-5 w-5"
+                      onClick={() => handleUpdate(rowData._id)}
+                    />
                   </button>
                 </td>
                 <td className="py-4 px-3">
@@ -61,7 +67,7 @@ const List = ({ column, data, active, onDelete }) => {
 
   return (
     <div className="p-5 m-5 relative overflow-x-auto shadow-md sm:rounded-lg bg-opacity-50 backdrop-blur-sm">
-      <table className="min-w-full rounded-xl">
+      <table className="min-w-full rounded-xl border-separate border-spacing-y-4">
         <thead className='text-gray-200'>
           <tr>
             {column.map((col, index) => (
@@ -79,7 +85,9 @@ const List = ({ column, data, active, onDelete }) => {
               ))}
               <td className="py-4 px-3">
                 <button className="text-blue-500 hover:text-blue-700">
-                  <FiEdit className="h-5 w-5" />
+                  <FiEdit className="h-5 w-5"
+                    onClick={() => handleUpdate(rowData._id)}
+                  />
                 </button>
               </td>
               <td className="py-4 px-3">

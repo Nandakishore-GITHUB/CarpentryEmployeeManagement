@@ -8,6 +8,8 @@ import List from '../../Components/List'
 import requests from '../../api/requests.js';
 import RegisterModel from '../../Components/Models/RegisterModel'
 import DeleteModal from '../../Components/Models/DeleteModal'
+import ProjectEditModal from '../../Components/Models/ProjectEditModal'
+import EmployeeEditModal from '../../Components/Models/EmployeeEditModal'
 
 function AdminSettingsDashboard() {
 
@@ -25,6 +27,9 @@ function AdminSettingsDashboard() {
     // handling model for deleteing data and setting state for passing _id to delete
     const [deleteData, setDeleteData] = useState(null)
 
+    // handling model for updating data and setting state for passing _id to update
+    const [updateData, setUpdateData] = useState(null)
+
     // handling loading animations
     const [loading, setLoading] = useState(true)
 
@@ -34,13 +39,7 @@ function AdminSettingsDashboard() {
     // setting the active url
     const [URL, setURL] = useState('/project/all')
 
-    // handle on close event of the model
-    const handleOnClose = () => {
-        setShowModel(false)
-        setRegisterModel(false)
-        setDeleteData(null)
-    }
-
+    
     // function to handle state changes on clicking project button
     const handleProjectButton = () => {
         setURL('/project/all')
@@ -63,21 +62,33 @@ function AdminSettingsDashboard() {
     const handleDelete = (_id) => {
         setDeleteData(_id);
     }
-
+    
+    // function to handleUpdate
+    const handleUpdate = (_id) => {
+        setUpdateData(_id);
+    }
+    
     const [isDrawerVisible, setIsDrawerVisible] = useState(false);
-
+    
     const showNavigationDrawer = () => {
         setIsDrawerVisible(true);
     };
-
+    
     const hideNavigationDrawer = () => {
         setIsDrawerVisible(false);
     };
-
-
+    
+    // handle on close event of the model
+    const handleOnClose = () => {
+        setShowModel(false)
+        setRegisterModel(false)
+        setDeleteData(null)
+        setUpdateData(null)
+    }
+    
     //add useEffect to get data from server
     useEffect(() => {
-
+        
         const fetchData = async () => {
             try {
                 const response = await requests.getData(URL);
@@ -271,7 +282,7 @@ function AdminSettingsDashboard() {
 
                     : <div className='w-full'>
                         {data && data.length > 0 ? (
-                            <List column={active === 'project' ? projecColumns : active === 'workers' ? employeeColumns : []} data={data} active={active} onDelete={handleDelete} />
+                            <List column={active === 'project' ? projecColumns : active === 'workers' ? employeeColumns : []} data={data} active={active} onUpdate={handleUpdate} onDelete={handleDelete} />
                         ) : (
                             <p>No data available.</p>
                         )}
@@ -291,6 +302,20 @@ function AdminSettingsDashboard() {
                 <div className='absolute'>
                     <DeleteModal itemId={deleteData} active={active} onClose={handleOnClose} />
                 </div>
+
+
+                <div className='absolute'>
+                    <ProjectEditModal itemId={updateData} active={active} onClose={handleOnClose} />
+                </div>
+
+                <div className='absolute'>
+                    <EmployeeEditModal itemId={updateData} active={active} onClose={handleOnClose} />
+                </div>
+
+                {/* <div className='absolute'>
+                    <TimingEditModal itemId={updateData} active={active} onClose={handleOnClose} />
+                </div> */}
+
 
             </div>
 
