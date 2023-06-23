@@ -107,7 +107,7 @@ function AdminSettingsDashboard() {
 
         fetchData();
 
-    }, [URL, showModel, active])
+    }, [URL, showModel, active, data])
 
     console.log(data);
 

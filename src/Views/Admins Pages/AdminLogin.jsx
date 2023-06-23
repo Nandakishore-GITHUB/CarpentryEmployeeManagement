@@ -4,12 +4,16 @@ import { AiFillEyeInvisible, AiFillEye } from 'react-icons/ai'
 import { Toaster, toast } from 'react-hot-toast'
 import { useFormik } from 'formik'
 import { usernameValidate, passwordValidate } from '../../helper/validate'
-import { Link } from 'react-router-dom'
 import axios from '../../api/axios'
+
 
 function AdminLogin() {
 
+    // const navigate = useNavigate(); // Move useNavigate here
+    
     const [showPassword, setShowPassword] = useState(false)
+
+
 
     const formik = useFormik({
         initialValues: {
@@ -24,31 +28,40 @@ function AdminLogin() {
         validateOnChange: false,
         onSubmit: async values => {
             try {
-                const response = await axios.post('/auth/login', JSON.stringify( { username : values.username, password: values.password } ), 
-                {
-                    headers: { 
-                        'Content-Type': 'application/json'
-                    }
-                })
+                const response = await axios.post('/auth/login', JSON.stringify({ username: values.username, password: values.password }),
+                    {
+                        headers: {
+                            'Content-Type': 'application/json'
+                        }
+                    })
                 toast.success(response.data.message);
-                console.log( JSON.stringify(response.data) );
+                console.log(JSON.stringify(response.data));
                 localStorage.setItem('_id', response.data.data._id)
                 localStorage.setItem('token', response.data.token)
                 localStorage.setItem('username', response.data.data.username)
                 localStorage.setItem('role', response.data.data.roles)
                 localStorage.setItem('id', response.data.data.userId)
                 localStorage.setItem('name', response.data.data.name)
+
+
+
             } catch (error) {
                 if (error.response && error.response.data) {
                     toast.error(error.response.data.message);
-                  } else {
+                } else {
                     console.log(JSON.stringify(error));
-                  }                  
+                }
             }
         }
     })
 
-    return ( 
+
+
+
+
+
+    return (
+
         <div className='flex items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0 h-screen bg-black bg-opacity-0 backdrop-filter backdrop-blur-md'>
 
             <Toaster position='top-center' reverseOrder={false}></Toaster>
@@ -114,8 +127,9 @@ function AdminLogin() {
                         <div>
                             <button
                                 type="submit"
-                                className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transform active:scale-y-75 transition-transform">
-                                <Link to="/select-dashboard">Submit</Link>
+                                className="flex w-full justify-center rounded-md bg-blue-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-blue-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 transform active:scale-y-75 transition-transform"
+                                >
+                                Submit
                             </button>
                         </div>
                     </form>
@@ -135,6 +149,7 @@ function AdminLogin() {
                 </div>
             </div>
         </div>
+
     )
 }
 

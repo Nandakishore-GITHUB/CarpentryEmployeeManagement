@@ -1,7 +1,6 @@
 import BgVideo from './assets/backgroundvideo.mp4'
-import { Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import AdminLogin from './Views/Admins Pages/AdminLogin'
-import AdminRegistration from './Views/Admins Pages/AdminRegistration'
 import AdminDashboardSelect from './Views/Admins Pages/AdminDashboardSelect'
 import AdminProjectDashboard from './Views/Admins Pages/AdminProjectDashboard'
 import AdminWorkersDashboard from './Views/Admins Pages/AdminWorkersDashboard'
@@ -10,7 +9,7 @@ import WorkersDashboard from './Views/Workers Page/WorkersDashboard'
 
 
 function App() {
-  
+
 
   return (
 
@@ -22,16 +21,16 @@ function App() {
           <source src={BgVideo} type="video/mp4" />
         </video>
       </div>
-
-      <Routes>
-        <Route path='/' element={<AdminLogin />} />
-        <Route path='/register' element={<AdminRegistration />} />
-        <Route path='select-dashboard' element={<AdminDashboardSelect />} />
-        <Route path='admin-project-dashboard' element={<AdminProjectDashboard />} />
-        <Route path='admin-workers-dashboard' element={<AdminWorkersDashboard />} />
-        <Route path='admin-settings-dashboard' element={<AdminSettingsDashboard />} />
-        <Route path='workers-dashboard' element={<WorkersDashboard />} />
-      </Routes>
+      <Router>
+        <Routes>
+          <Route path='/' element={<AdminLogin />} />
+          <Route path='select-dashboard' element={<AdminDashboardSelect />} />
+          <Route path='admin-project-dashboard' element={<AdminProjectDashboard />} />
+          <Route path='admin-workers-dashboard' element={<AdminWorkersDashboard />} />
+          <Route path='admin-settings-dashboard' element={<AdminSettingsDashboard />} />
+          <Route path='workers-dashboard' element={<WorkersDashboard />} />
+        </Routes>
+      </Router>
     </div>
 
   )
